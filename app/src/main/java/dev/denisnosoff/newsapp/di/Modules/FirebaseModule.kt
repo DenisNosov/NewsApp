@@ -6,13 +6,14 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Singleton
 @Module
 class FirebaseModule {
 
+    @Singleton
     @Provides
     fun provideFirebaseAuth() : FirebaseAuth = FirebaseAuth.getInstance()
 
+    @Singleton
     @Provides
     fun provideFirebaseDatabase() : FirebaseDatabase = FirebaseDatabase.getInstance()
 }
