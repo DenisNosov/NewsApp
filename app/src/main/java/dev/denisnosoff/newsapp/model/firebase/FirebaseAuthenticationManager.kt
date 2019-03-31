@@ -4,7 +4,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import javax.inject.Inject
 
-class FirebaseAuthenticationManager @Inject constructor(
+class FirebaseAuthenticationManager(
     private val authentication: FirebaseAuth
 ) {
 
@@ -31,4 +31,8 @@ class FirebaseAuthenticationManager @Inject constructor(
     }
 
     fun getUserId() : String = authentication.currentUser?.uid ?: ""
+
+    fun logOut() {
+        authentication.signOut()
+    }
 }

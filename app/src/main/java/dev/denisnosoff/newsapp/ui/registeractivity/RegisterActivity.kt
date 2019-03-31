@@ -1,5 +1,7 @@
 package dev.denisnosoff.newsapp.ui.registeractivity
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,8 +10,16 @@ import androidx.lifecycle.ViewModelProviders
 import dev.denisnosoff.newsapp.R
 import dev.denisnosoff.newsapp.ui.mainactivity.MainActivity
 import kotlinx.android.synthetic.main.activity_register.*
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 
 class RegisterActivity : AppCompatActivity() {
+
+    companion object {
+        fun start(activity: Activity) {
+            activity.startActivity<RegisterActivity>()
+        }
+    }
 
     private lateinit var viewModel : RegisterViewModel
 
@@ -41,7 +51,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         viewModel.onErrorLiveData.observe(this, Observer {
-            Toast.makeText(this, "Error registering new user", Toast.LENGTH_SHORT).show()
+            toast("Error registering new user")
         })
     }
 }

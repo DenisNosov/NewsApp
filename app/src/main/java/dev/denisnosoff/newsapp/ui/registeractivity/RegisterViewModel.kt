@@ -1,20 +1,28 @@
 package dev.denisnosoff.newsapp.ui.registeractivity
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import dev.denisnosoff.newsapp.App
 import dev.denisnosoff.newsapp.model.SingleLiveEvent
 import dev.denisnosoff.newsapp.model.firebase.FirebaseAuthenticationManager
 import dev.denisnosoff.newsapp.model.firebase.FirebaseDatabaseManager
 import javax.inject.Inject
 
-class RegisterViewModel @Inject constructor(
-    private val authenticationManager: FirebaseAuthenticationManager,
-    private val databaseManager: FirebaseDatabaseManager
-) : ViewModel() {
+class RegisterViewModel(app: Application) : AndroidViewModel(app) {
+
+    @Inject
+    lateinit var authenticationManager: FirebaseAuthenticationManager
+
+    @Inject
+    lateinit var databaseManager: FirebaseDatabaseManager
 
     val onSuccessLiveData = SingleLiveEvent<Unit>()
 
     val onErrorLiveData = SingleLiveEvent<Unit>()
+
+    init {
+        getApplication<App>().component.inject(this)
+    }
 
     fun registerNewUser(email: String, password: String, username: String) {
         authenticationManager.register(email, password, username) {

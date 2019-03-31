@@ -4,7 +4,7 @@ import com.google.firebase.database.FirebaseDatabase
 import dev.denisnosoff.newsapp.model.data.User
 import javax.inject.Inject
 
-class FirebaseDatabaseManager @Inject constructor(
+class FirebaseDatabaseManager(
     private val database: FirebaseDatabase
 ) {
 
